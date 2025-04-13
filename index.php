@@ -33,9 +33,7 @@ if (!isset($_SESSION['user_id'])) {
 
     <?php include_once 'nav_bar.php'; ?>
 
-    <!-- ✅ 移除 Welcome 文本 -->
 
-    <!-- ✅ 加载 jQuery 和 Bootstrap 3.3.7 JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
