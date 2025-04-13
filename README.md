@@ -13,6 +13,7 @@ Operating System: Windows 11
 Programming Languages: PHP, HTML
 
 website location:http://lrgs.ftsm.ukm.my/users/A185125/tp2543/myPT3/login.php
+admin acount:admin@example.com password:123
 
 Set up a local web server environment (e.g., XAMPP, WAMP, or LAMP).
 Move the cloned project folder to the web server's document root directory.
