@@ -2,13 +2,13 @@
 session_start();
 include_once 'database.php';
 
-// ✅ 确保用户已登录
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// ✅ 确保 `order_id` 存在
+
 if (!isset($_GET['oid'])) {
     die("Error: Missing Order ID.");
 }
@@ -16,13 +16,13 @@ if (!isset($_GET['oid'])) {
 $order_id = $_GET['oid'];
 
 try {
-    // 获取订单信息
+  
     $stmt = $conn->prepare("SELECT * FROM tbl_orders_a185125_pt2 WHERE fld_order_id = :oid");
     $stmt->bindParam(':oid', $order_id, PDO::PARAM_STR);
     $stmt->execute();
     $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // 获取订单详情及产品信息
+  
     $stmt = $conn->prepare("SELECT od.fld_quantity, p.fld_product_name, p.fld_price 
                             FROM tbl_orders_details_a185125_pt2 od
                             JOIN tbl_products_a185125_pt2 p ON od.fld_product_id = p.fld_product_id
@@ -66,7 +66,7 @@ try {
         }
 
         .invoice-logo {
-            width: 80px; /* Logo 大小 */
+            width: 80px; 
             height: auto;
         }
 
@@ -112,7 +112,7 @@ try {
 <body>
 
     <div class="invoice-box">
-        <!-- ✅ Logo 和标题 -->
+      
         <div class="invoice-header">
             <img src="logo.jpg" class="invoice-logo" alt="SkyTech Aviation Supplies Logo">
             <div>
@@ -130,7 +130,6 @@ try {
 
         <hr>
 
-        <!-- ✅ 订单详情表格 -->
         <table class="table table-bordered invoice-table">
             <thead>
                 <tr>
@@ -169,7 +168,6 @@ try {
         <hr>
         <p class="text-center">This is a computer-generated invoice. No signature required.</p>
 
-        <!-- ✅ 打印按钮 -->
         <div class="btn-print text-center">
             <button onclick="window.print()" class="btn btn-primary">Print Invoice</button>
             <a href="orders.php" class="btn btn-secondary">Back to Orders</a>
