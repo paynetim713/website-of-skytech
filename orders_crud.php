@@ -2,22 +2,21 @@
 session_start();
 include_once 'database.php';
 
-// ✅ 确保用户已登录
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// ✅ 连接数据库
+
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// ✅ 生成唯一 `order_id`
+
 function generateOrderID() {
     return 'O' . uniqid() . '.' . mt_rand(10000000, 99999999);
 }
 
-// ✅ 处理 `Create` 订单（`Staff` 和 `Admin` 均可）
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create'])) {
     try {
         $orderID = generateOrderID();
@@ -35,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create'])) {
     }
 }
 
-// ✅ 处理 `Edit` 订单（仅限 `Admin`）
 if ($_SESSION['user_level'] === 'Admin' && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     try {
         $stmt = $conn->prepare("UPDATE tbl_orders_a185125_pt2 
@@ -53,7 +51,6 @@ if ($_SESSION['user_level'] === 'Admin' && $_SERVER["REQUEST_METHOD"] == "POST" 
     }
 }
 
-// ✅ 处理 `Delete` 订单（仅限 `Admin`）
 if ($_SESSION['user_level'] === 'Admin' && isset($_GET['action']) && $_GET['action'] == 'delete') {
     try {
         $stmt = $conn->prepare("DELETE FROM tbl_orders_a185125_pt2 WHERE fld_order_id = :oid");
@@ -66,7 +63,6 @@ if ($_SESSION['user_level'] === 'Admin' && isset($_GET['action']) && $_GET['acti
     }
 }
 
-// ✅ 处理 `Edit` 订单的回显数据
 $editrow = null;
 if ($_SESSION['user_level'] === 'Admin' && isset($_GET['action']) && $_GET['action'] == 'edit') {
     try {
@@ -148,7 +144,6 @@ if ($_SESSION['user_level'] === 'Admin' && isset($_GET['action']) && $_GET['acti
             </select>
             <br>
 
-            <!-- ✅ `Staff` 只能 `Create` -->
             <?php if ($_SESSION['user_level'] === 'Admin' && isset($editrow)) { ?>
                 <button type="submit" name="update" class="btn btn-warning">Update Order</button>
             <?php } else { ?>
