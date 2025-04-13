@@ -55,9 +55,5 @@ Submit a pull request describing your changes.
 Contact
 If you have any questions, suggestions, or feedback, feel free to contact me:
 
-Email: ashleyliu139@gmail.com
-GitHub: [your-github-username]
-
-License
-This project is licensed under the MIT License.
-Let me know if you have any further questions or if there's anything else I can assist you with!
+Email: aslm2l1k123@gmail.com
+GitHub: paynetim713(aslm2l1k123@gmail.com)
