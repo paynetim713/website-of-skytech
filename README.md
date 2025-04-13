@@ -12,9 +12,7 @@ Tech Stack
 Operating System: Windows 11
 Programming Languages: PHP, HTML
 
-Installation
-Clone the repository:
-git clone https://github.com/your-username/online-aviation-shop.git
+website location:http://lrgs.ftsm.ukm.my/users/A185125/tp2543/myPT3/login.php
 
 Set up a local web server environment (e.g., XAMPP, WAMP, or LAMP).
 Move the cloned project folder to the web server's document root directory.
