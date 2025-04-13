@@ -2,17 +2,15 @@
 session_start();
 include_once 'database.php';
 
-// ✅ 确保用户已登录
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// ✅ 连接数据库
+
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// ✅ 获取所有订单
 try {
     $stmt = $conn->prepare("SELECT * FROM tbl_orders_a185125_pt2");
     $stmt->execute();
@@ -38,7 +36,6 @@ try {
     <div class="container">
         <h2>Orders</h2>
 
-        <!-- ✅ 只有 `Admin` 和 `Staff` 能创建订单 -->
         <?php if ($_SESSION['user_level'] == 'Admin' || $_SESSION['user_level'] == 'Staff') { ?>
             <a href="orders_crud.php?action=create" class="btn btn-success">Create New Order</a>
         <?php } ?>
