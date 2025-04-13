@@ -81,11 +81,10 @@
     </div>
 </nav>
 
-<!-- ✅ 确保 jQuery 先加载，再加载 Bootstrap 3.3.7 JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
-<!-- ✅ 强制初始化 Bootstrap 3 Dropdown -->
+
 <script>
     $(document).ready(function(){
         $('.dropdown-toggle').dropdown();
