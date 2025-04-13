@@ -2,7 +2,6 @@
 session_start();
 include_once 'database.php';
 
-// 确保用户未登录，已登录用户直接跳转
 if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
@@ -10,7 +9,7 @@ if (isset($_SESSION['user_id'])) {
 
 $error = "";
 
-// 处理表单提交
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $email = trim($_POST['email']);
@@ -50,7 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SkyTech Aviation Supplies - Login</title>
 
-    <!-- Bootstrap 3.3.7 CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -83,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="container">
         <div class="login-container">
-            <!-- 🔹 添加 LOGO -->
+           
             <img src="logo.jpg" class="login-logo" alt="SkyTech Aviation Logo">
             
             <h2>Login</h2>
@@ -101,14 +99,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
 
-            <!-- 🔹 显示错误信息 -->
+           
             <?php if (!empty($error)) { ?>
                 <p class="text-danger text-center mt-3"><?php echo $error; ?></p>
             <?php } ?>
         </div>
     </div>
 
-    <!-- ✅ 加载 jQuery 和 Bootstrap 3.3.7 JavaScript -->
+   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
