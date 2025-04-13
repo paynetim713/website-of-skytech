@@ -2,17 +2,17 @@
 session_start();
 include_once 'database.php';
 
-// 确保用户已登录
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// 数据库连接
+
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// ✅ 处理 `Create` 操作
+
 if (isset($_POST['create']) && $_SESSION['user_level'] === 'Admin') {
     try {
         $stmt = $conn->prepare("INSERT INTO tbl_customers_a185125_pt2 (fld_name, fld_contact, fld_address) 
@@ -28,7 +28,6 @@ if (isset($_POST['create']) && $_SESSION['user_level'] === 'Admin') {
     }
 }
 
-// ✅ 处理 `Update` 操作
 if (isset($_POST['update']) && $_SESSION['user_level'] === 'Admin') {
     try {
         $stmt = $conn->prepare("UPDATE tbl_customers_a185125_pt2 
@@ -46,7 +45,7 @@ if (isset($_POST['update']) && $_SESSION['user_level'] === 'Admin') {
     }
 }
 
-// ✅ 处理 `Delete` 操作
+
 if (isset($_GET['delete']) && $_SESSION['user_level'] === 'Admin') {
     try {
         $stmt = $conn->prepare("DELETE FROM tbl_customers_a185125_pt2 WHERE fld_customer_id = :cid");
@@ -59,7 +58,7 @@ if (isset($_GET['delete']) && $_SESSION['user_level'] === 'Admin') {
     }
 }
 
-// ✅ 加载编辑数据
+
 $editrow = null;
 if (isset($_GET['edit']) && $_SESSION['user_level'] === 'Admin') {
     try {
@@ -99,7 +98,6 @@ if (isset($_GET['edit']) && $_SESSION['user_level'] === 'Admin') {
         <h2 class="text-center">Customers Management</h2>
 
         <?php if ($_SESSION['user_level'] === 'Admin') { ?>
-            <!-- ✅ Create/Update Form -->
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 form-container">
                     <form action="customers.php" method="post">
@@ -137,7 +135,7 @@ if (isset($_GET['edit']) && $_SESSION['user_level'] === 'Admin') {
 
         <hr>
 
-        <!-- ✅ Customers Table -->
+    
         <table class="table table-bordered">
             <thead>
                 <tr class="active">
