@@ -11,7 +11,6 @@ if (isset($_GET['edit'])) {
         $stmt->execute();
         $editrow = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // 如果找不到该产品，设置 $editrow 为空数组，防止报错
         if (!$editrow) {
             $editrow = [];
         }
@@ -19,17 +18,15 @@ if (isset($_GET['edit'])) {
         echo "Error: " . $e->getMessage();
     }
 } else {
-    // 如果不是编辑模式，确保 $editrow 是空数组，防止 undefined variable 错误
+   
     $editrow = [];
 }
 
-// 确保用户已登录
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// 获取用户权限
 $isAdmin = $_SESSION['user_level'] === 'Admin';
 
 $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -61,7 +58,6 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         <h2 class="text-center">Manage Products</h2>
         <hr>
 
-        <!-- ✅ 只有 Admin 可以创建或编辑产品 -->
         <?php if ($isAdmin): ?>
         <div class="card p-4 mb-4 border">
             <h4 class="text-center"><?php echo isset($_GET['edit']) ? "Edit Product" : "Add New Product"; ?></h4>
@@ -118,7 +114,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         </div>
         <?php endif; ?>
 
-        <!-- 产品列表 -->
+     
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
