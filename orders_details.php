@@ -2,13 +2,13 @@
 session_start();
 include_once 'database.php';
 
-// ✅ 确保用户已登录
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// ✅ 获取 `Order ID`
+
 if (!isset($_GET['oid'])) {
     header("Location: orders.php");
     exit();
@@ -16,7 +16,7 @@ if (!isset($_GET['oid'])) {
 
 $order_id = $_GET['oid'];
 
-// ✅ 获取 `Product List`
+
 try {
     $stmt = $conn->prepare("SELECT fld_product_id, fld_product_name FROM tbl_products_a185125_pt2");
     $stmt->execute();
@@ -25,7 +25,6 @@ try {
     die("Error: " . $e->getMessage());
 }
 
-// ✅ 获取 `Order Details`
 try {
     $stmt = $conn->prepare("SELECT od.fld_order_detail_id, od.fld_order_id, 
                                     p.fld_product_name, od.fld_quantity 
@@ -55,7 +54,7 @@ try {
     <div class="container">
         <h2>Order Details for Order ID: <?php echo htmlspecialchars($order_id); ?></h2>
         
-        <!-- Add Product to Order -->
+     
         <form action="orders_details_crud.php" method="post">
             <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order_id); ?>">
 
@@ -78,7 +77,6 @@ try {
 
         <hr>
 
-        <!-- Order Details Table -->
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -104,7 +102,6 @@ try {
             </tbody>
         </table>
 
-        <!-- Generate Invoice -->
 <form action="invoice.php" method="GET">
     <input type="hidden" name="oid" value="<?php echo htmlspecialchars($order_id); ?>">
     <button type="submit" class="btn btn-success btn-lg btn-block">Generate Invoice</button>
